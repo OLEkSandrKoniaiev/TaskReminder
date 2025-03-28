@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+from .extra_conf import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -15,6 +17,8 @@ DEBUG = os.environ.get('DEBUG') == 'True'
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'users.UserModel'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -23,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # my_apps
+    'core',
 ]
 
 MIDDLEWARE = [
