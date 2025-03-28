@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # my_apps
     'core',
     'apps.universities',
+    'apps.programs',
 ]
 
 MIDDLEWARE = [
