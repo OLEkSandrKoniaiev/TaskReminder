@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.staticfiles',
+    'rest_framework_simplejwt',
 
     # my_apps
     'core',
@@ -32,6 +33,7 @@ INSTALLED_APPS = [
     'apps.programs',
     'apps.courses',
     'apps.users',
+    'apps.auth',
 ]
 
 MIDDLEWARE = [
