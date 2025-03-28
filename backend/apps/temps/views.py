@@ -1,9 +1,15 @@
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly
 
 from .models import TempModel
 from .serializers import TempSerializer
+
+
+class IsOwnerOrReadOnly(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if request.method in ('GET', 'HEAD', 'OPTIONS'):
+            return True
+        return obj.user == request.user
 
 
 class TempListCreateView(ListCreateAPIView):
@@ -18,13 +24,4 @@ class TempListCreateView(ListCreateAPIView):
 class TempRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     serializer_class = TempSerializer
     queryset = TempModel.objects.all()
-    permission_classes = (IsAuthenticatedOrReadOnly,)
-
-    # Get rid of this in the near future
-    def get_object(self):
-        obj = super().get_object()
-
-        if self.request.method in ['PUT', 'PATCH', 'DELETE'] and obj.user != self.request.user:
-            raise PermissionDenied("You do not have permission to perform this action.")
-
-        return obj
+    permission_classes = (IsOwnerOrReadOnly,)
