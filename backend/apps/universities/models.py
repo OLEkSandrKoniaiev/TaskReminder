@@ -10,5 +10,5 @@ class UniversityModel(BaseModel):
         ordering = ['-id']
 
     name = models.CharField(max_length=100, unique=True, validators=[
-        V.MinValueValidator(4, "University name must be 4 characters long")
+        V.MinLengthValidator(4, "University name must be 4 characters long")
     ])

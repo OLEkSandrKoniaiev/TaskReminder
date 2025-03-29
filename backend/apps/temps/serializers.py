@@ -14,9 +14,11 @@ class TempSerializer(serializers.ModelSerializer):
     class Meta:
         model = TempModel
         fields = ('id', 'semester', 'is_public', 'user', 'university', 'program', 'courses', 'course_ids')
+        read_only_fields = ('user',)
 
     def create(self, validated_data):
         course_ids = validated_data.pop('course_ids', [])
+        validated_data['user'] = self.context['request'].user
         temp = TempModel.objects.create(**validated_data)
 
         TempCourseModel.objects.bulk_create([

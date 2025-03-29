@@ -4,5 +4,5 @@ from django.urls import path
 
 urlpatterns = [
     path('', TokenObtainPairView.as_view(), name='auth-login'),
-    path('/refresh', TokenRefreshView.as_view(), name='auth-refresh'),
+    # path('/refresh', TokenRefreshView.as_view(), name='auth-refresh'),
 ]
